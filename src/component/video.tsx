@@ -1,20 +1,15 @@
 'use client';
-import { useRef } from 'react';
-import { useLocalStorage } from '@/src/hooks/useLocalStorage';
+import { useRef, useState } from 'react';
 import { useHls } from '@/src/hooks/useHls';
+import PlayButton from '@/src/component/playButton';
+
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useLocalStorage<boolean>('isMuted', true);
-  const handleMute = () => {
-    if (videoRef.current) {
-      const newMutedState = !muted;
-      videoRef.current.muted = newMutedState;
-      setMuted(newMutedState);
-    }
-  };
+  const [playVideo, setPlayVideo] = useState(false);
+  const [mouseHover, setMouseHover] = useState(false);
+  useHls('http://localhost:8080/hls/1080/123123_1080p.m3u8', videoRef);
+
   // const [duration, setDuration] = useState(0); // 비디오 전체 길이
-  // const [playVideo, setPlayVideo] = useState(false);
-  // const [mouseHover, setMouseHover] = useState(false);
 
   // const handleTimeUpdate = () => {
   //   if (videoRef.current) {
@@ -59,47 +54,47 @@ export default function Video() {
   //   }
   // }, []);
 
-  // const handleClick = () => {
-  //   const toggledPlay = !playVideo;
-  //   setPlayVideo(toggledPlay);
+  const handleClick = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const toggledPlay = !playVideo;
+    setPlayVideo(toggledPlay);
 
-  //   if (toggledPlay) {
-  //     videoRef.current.play();
-  //     return;
-  //   }
+    if (toggledPlay) {
+      video.play();
+      return;
+    }
 
-  //   if (!toggledPlay) {
-  //     videoRef.current.pause();
-  //   }
-  // };
+    if (!toggledPlay) {
+      video.pause();
+    }
+  };
 
-  // const handleMouseEnter = () => {
-  //   setMouseHover(true);
-  // };
+  const handleMouseEnter = () => {
+    setMouseHover(true);
+  };
 
-  // const handleMouseLeave = () => {
-  //   setMouseHover(false);
-  // };
+  const handleMouseLeave = () => {
+    setMouseHover(false);
+  };
 
-  useHls('http://localhost:8080/hls/1080/123123_1080p.m3u8', videoRef, muted);
   return (
-    <div className="relative">
-      {/* {mouseHover && (
-        <button className="absolute w-[200px] h-[100px] bg-blue-500 top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
-          재생
-        </button>
-      )} */}
-      {muted ? <button onClick={handleMute}>음소거</button> : null}
-
+    <div className="relative w-full h-full">
       <video
         ref={videoRef}
         autoPlay
         // onTimeUpdate={handleTimeUpdate} // 현재 재생 시간 업데이트
-        // onClick={handleClick}
-        // onMouseEnter={handleMouseEnter}
-        // onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="absolute w-full h-full"
       ></video>
-      {/* <p>Duration: {duration.toFixed(2)} seconds</p> */}
+      {mouseHover && (
+        <PlayButton
+          size={100}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+      )}
     </div>
   );
 }

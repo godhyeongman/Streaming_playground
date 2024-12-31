@@ -1,10 +1,13 @@
-import Video from '@/src/component/video';
+'use client';
+
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
   return (
-    <>
-      <h1 className="test">Hello world</h1>
-      <Video></Video>
-    </>
+    <div>
+      Hello World
+      <button onClick={() => router.push('/test')}>이동</button>
+    </div>
   );
 }

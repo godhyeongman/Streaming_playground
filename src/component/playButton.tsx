@@ -1,5 +1,7 @@
+'use client';
+
 import { AiFillPlayCircle } from 'react-icons/ai';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 type PlayButtonProps = {
   onClick?: () => void;
@@ -15,6 +17,7 @@ export default function PlayButton({
   return (
     <div className={cn(className)}>
       <AiFillPlayCircle onClick={onClick} size={size} />
+      <h1 className="text-red-500">Play</h1>
     </div>
   );
 }

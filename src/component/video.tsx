@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import { useHls } from '@/src/hooks/useHls';
 import PlayButton from '@/src/component/playButton';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 type VideoProps = {
   url: string;
   width?: number | string;
@@ -44,7 +44,7 @@ export default function Video({
   };
 
   return (
-    <div className={cn(width, height, 'relative')}>
+    <div className={cn(width, height)}>
       <video
         className="w-full h-full object-contain"
         ref={videoRef}
@@ -57,7 +57,7 @@ export default function Video({
       {mouseHover && (
         <PlayButton
           size={100}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
       )}
     </div>

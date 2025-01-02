@@ -2,14 +2,18 @@
 import { useRef, useState } from 'react';
 import { useHls } from '@/src/hooks/useHls';
 import PlayButton from '@/src/component/playButton';
-
-
+import { cn } from '@/utils';
 type VideoProps = {
   url: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
 };
-export default function Video({ url, width, height }: VideoProps) {
+
+export default function Video({
+  url,
+  width = 'w-full',
+  height = 'h-full',
+}: VideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playVideo, setPlayVideo] = useState(false);
   const [mouseHover, setMouseHover] = useState(false);
@@ -40,13 +44,15 @@ export default function Video({ url, width, height }: VideoProps) {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className={cn(width, height, 'relative')}>
       <video
+        className="w-full h-full object-contain"
         ref={videoRef}
         autoPlay
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        style={{ width: '100%', height: '100%' }}
       />
       {mouseHover && (
         <PlayButton

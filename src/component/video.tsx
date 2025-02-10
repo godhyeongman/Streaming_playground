@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import { useHls } from '@/src/hooks/useHls';
 import PlayButton from '@/src/component/playButton';
 import { cn } from '@/lib/utils';
+import VideoController from './videoController';
+
 type VideoProps = {
   url: string;
   width?: number | string;
@@ -17,7 +19,7 @@ export default function Video({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playVideo, setPlayVideo] = useState(false);
   const [mouseHover, setMouseHover] = useState(false);
-  useHls(url, videoRef);
+  const { bitrate, changeBitrate, levels } = useHls(url, videoRef);
 
   const handleClick = () => {
     const video = videoRef.current;
@@ -43,6 +45,11 @@ export default function Video({
     setMouseHover(false);
   };
 
+  const handleVolumeChange = (value: number[]) => {
+    if (!videoRef.current) return;
+    videoRef.current.volume = value[0] / 100;
+  };
+
   return (
     <div className={cn(width, height)}>
       <video
@@ -60,6 +67,7 @@ export default function Video({
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
       )}
+      <VideoController onVolumeChange={handleVolumeChange} />
     </div>
   );
 }

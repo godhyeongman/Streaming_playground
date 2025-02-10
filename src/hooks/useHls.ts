@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import Hls from 'hls.js';
-import type { ManifestParsedData, Level } from 'hls.js';
+import type { ManifestParsedData, Level, LevelSwitchedData } from 'hls.js';
 
 export const useHls = (
   url: string,
   videoRef: React.RefObject<HTMLVideoElement>,
 ) => {
-  const [levels, setLevels] = useState<Level[]>([]);
+  const [levels, setLevels] = useState<Level[] | LevelSwitchedData>([]);
   const [currentBitrate, setCurrentBitrate] = useState(-1);
   const hlsRef = useRef<Hls | null>(null);
 

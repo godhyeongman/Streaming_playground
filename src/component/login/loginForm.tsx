@@ -44,7 +44,12 @@ export default function LoginForm() {
       className="flex flex-col gap-4 w-[25%]"
       onSubmit={handleSubmit(handleLoginSubmit, handleLoginError)}
     >
-      <Input {...register(ID_FORM_ID)} type="text" placeholder="아이디" />
+      <Input
+        {...register(ID_FORM_ID)}
+        type="text"
+        placeholder="아이디"
+        className="p-5"
+      />
       {formState.errors.id && (
         <p className="text-red-500">{formState.errors.id.message}</p>
       )}
@@ -53,6 +58,7 @@ export default function LoginForm() {
         {...register(PASSWORD_FORM_ID)}
         type="password"
         placeholder="비밀번호"
+        className="p-5"
       />
       {formState.errors.password && (
         <p className="text-red-500">{formState.errors.password.message}</p>

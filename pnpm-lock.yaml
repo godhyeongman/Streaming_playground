@@ -32,6 +32,9 @@ dependencies:
   react-dom:
     specifier: 19.0.0-rc-66855b96-20241106
     version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
+  react-hook-form:
+    specifier: ^7.54.2
+    version: 7.54.2(react@19.0.0-rc-66855b96-20241106)
   react-icons:
     specifier: ^5.4.0
     version: 5.4.0(react@19.0.0-rc-66855b96-20241106)
@@ -2933,6 +2936,15 @@ packages:
     dependencies:
       react: 19.0.0-rc-66855b96-20241106
       scheduler: 0.25.0-rc-66855b96-20241106
+    dev: false
+
+  /react-hook-form@7.54.2(react@19.0.0-rc-66855b96-20241106):
+    resolution: {integrity: sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+    dependencies:
+      react: 19.0.0-rc-66855b96-20241106
     dev: false
 
   /react-icons@5.4.0(react@19.0.0-rc-66855b96-20241106):

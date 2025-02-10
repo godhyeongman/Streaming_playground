@@ -1,4 +1,6 @@
 import LoginForm from '@/src/component/login/loginForm';
+import LoginHelpers from '@/src/component/login/loginHelpers';
+import { Separator } from '@/src/component/ui/separator';
 
 export default function Login() {
   return (
@@ -8,6 +10,8 @@ export default function Login() {
         로그인 후 서비스 사용이 가능합니다
       </span>
       <LoginForm />
+      <Separator className="w-[25%] my-5" />
+      <LoginHelpers />
     </div>
   );
 }

@@ -41,7 +41,7 @@ export default function LoginForm() {
 
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 w-[25%]"
       onSubmit={handleSubmit(handleLoginSubmit, handleLoginError)}
     >
       <Input {...register(ID_FORM_ID)} type="text" placeholder="아이디" />

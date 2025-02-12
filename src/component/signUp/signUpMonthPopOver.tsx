@@ -34,7 +34,7 @@ export default function SignUpMonthPopOver({
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        side="top"
+        avoidCollisions={false}
         className="flex flex-col"
         onClick={handleMonthClick}
       >
